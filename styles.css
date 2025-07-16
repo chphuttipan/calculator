@@ -1,7 +1,6 @@
 #container {
     background-color: #da64fe;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     width: 320px;
@@ -11,21 +10,39 @@
 
 #display {
     background-color: #eeebee;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     height: 120px;
     width: 260px;
-    margin: 30px 30px;
-    padding: 10px;
+    margin: 15px 30px;
+    padding: -20px;
+    font-size: 36px;
+    overflow-y: auto;
 }
 
 #row {
     display: flex;
     justify-content: space-around;
-    margin: 10px 30px;
+    margin: 5px 30px;
+}
+
+#row-one {
+    display: flex;
+    justify-content: space-between;
+    text-wrap: wrap;
+    margin: 5px 38px;
 }
 
 button {
+    background-color: #b30eb3;
+    color: white;
     height: 50px;
     width: 50px;
     margin: 0;
     font-size: 20px;
+}
+
+#backspace {
+    width: 150px;
 }
