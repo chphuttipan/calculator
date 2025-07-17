@@ -10,8 +10,8 @@ const eight = document.getElementById('eight');
 const nine = document.getElementById('nine');
 const add = document.getElementById('add');
 const minus = document.getElementById('minus');
-const multiply = document.getElementById('multiply');
-const divide = document.getElementById('divide');
+const multi = document.getElementById('multiply');
+const divi = document.getElementById('divide');
 const backspace = document.getElementById('backspace');
 const clear = document.getElementById('clear');
 const dot = document.getElementById('dot');
@@ -67,6 +67,7 @@ nine.addEventListener('click', function() {
     display.textContent += numValue;
 })
 
+// 1. Create a function to check the last string is operator
 function endsWithOperator(text) {
     // Define the list of operators
     const operators = ['+', '-', '*', '/'];
@@ -78,6 +79,7 @@ function endsWithOperator(text) {
     return operators.some(operator => text.endsWith(operator));
 }
 
+// 2. Create a function to check the operator was include in the string equation
 function includeOperator(text) {
     // Define the list of operators
     const operators = ['+', '-', '*', '/'];
@@ -88,37 +90,88 @@ function includeOperator(text) {
     return operators.some(operator => text.includes(operator));
 }
 
+// 3. Addition function
+function plus(num1, num2) {
+    return num1 + num2; 
+}
+
+// 4. Subtraction function
+function subtract(num1, num2) {
+    return num1 - num2;
+}
+
+// 5. Multiplication function
+function multiply(num1, num2) {
+    return num1 * num2;
+}
+
+// 6. Division function
+function divide(num1, num2) {
+    if (num2 === 0) {
+        return 0;
+    }
+    else {
+        return num1 / num2;
+    }
+    
+}
+
+// 7. Create a operate function to calculate the equation
 function operate(text) {
-    const operators = ['+', '-', '*', '/'];
+    const operators = new Set(['+', '-', '*', '/']);
+    const eqList = [];
     // Find the index of the operator in the text
     if (text.length !== 0) {
-        for (let i = 0; i < operators.length; i++) {
-            const indexOp = text.indexOf(operators[i]);
+        var selectOperator;
+        var numString = '';
+        for (let i = 0; i < text.length; i++) {
+            if (operators.has(text[i])) {
+                // Before manage the operator, convert the previous string as number
+                const numValue = Number(numString);
+                // Push the number to the list
+                eqList.push(numValue);
+                numString = '';
+                // Clear the numValue to empty string;
+                // It's an operator, keep it as a string
+                selectOperator = text[i];
+                eqList.push(selectOperator);
+            }
+
+            else if (i  === text.length-1) {
+                numString += text[i];
+                const numValue = Number(numString);
+                eqList.push(numValue);
+            }
+
+            else {
+                // Add a number string to numString
+                numString += text[i];
+            }
         }
-        const firstNum = text.slice(0, indexOp);
-        const secondNum = text.slice(indexOp + 1);
-        const operand = text[indexOp];
-        firstNum = parseInt(firstNum);
-        secondNum = parseInt(secondNum);
-        
+
+        let result;
+        switch (selectOperator) {
+            case "+":
+                result = plus(eqList[0], eqList[2]);
+                break;
+            case "-":
+                result = subtract(eqList[0], eqList[2]);
+                break;
+            case "*":
+                result = multiply(eqList[0], eqList[2]);
+                break;
+            case "/":
+                result = divide(eqList[0], eqList[2]);
+                break;
+            default:
+                result = "Invalid operation";
+        }
+        return result;
     }
 }
 
 add.addEventListener('click', function() {
     const operand = '+';
-    var textValue = display.textContent;
-    var lastText = textValue.slice(-1);
-    if (endsWithOperator(lastText)) {
-        newText = textValue.slice(0,-1) + operand;
-        display.textContent = newText;
-    }
-    else {
-        display.textContent += operand;
-    }
-})
-
-minus.addEventListener('click', function() {
-    const operand = '-';
     var textValue = display.textContent;
     var lastText = textValue.slice(-1);
     
@@ -131,6 +184,30 @@ minus.addEventListener('click', function() {
         }
         else {
             // if the operator not in the last position, it would finish the calculation.
+            display.textContent = operate(textValue) + operand;
+        }
+    }
+
+    else {
+        display.textContent += operand;
+    }
+})
+
+minus.addEventListener('click', function() {
+    const operand = '-';
+    var textValue = display.textContent;
+    var lastText = textValue.slice(-1);
+
+    // Check the text include operator
+    if (includeOperator(textValue)) {
+        // Check position of the operator is the last
+        if (endsWithOperator(lastText)) {
+            newText = textValue.slice(0,-1) + operand;
+            display.textContent = newText;
+        }
+        else {
+            // if the operator not in the last position, it would finish the calculation.
+            display.textContent = operate(textValue) + operand;
         }
     }
     
@@ -139,28 +216,61 @@ minus.addEventListener('click', function() {
     }
 })
 
-multiply.addEventListener('click', function() {
+multi.addEventListener('click', function() {
     const operand = '*';
     var textValue = display.textContent;
     var lastText = textValue.slice(-1);
-    if (endsWithOperator(lastText)) {
-        newText = textValue.slice(0,-1) + operand;
-        display.textContent = newText;
+    
+    // Check the text include operator
+    if (includeOperator(textValue)) {
+        // Check position of the operator is the last
+        if (endsWithOperator(lastText)) {
+            newText = textValue.slice(0,-1) + operand;
+            display.textContent = newText;
+        }
+        else {
+            // if the operator not in the last position, it would finish the calculation.
+            display.textContent = operate(textValue) + operand;
+        }
     }
+
     else {
         display.textContent += operand;
     }
 })
 
-divide.addEventListener('click', function() {
+divi.addEventListener('click', function() {
     const operand = '/';
     var textValue = display.textContent;
     var lastText = textValue.slice(-1);
-    if (endsWithOperator(lastText)) {
-        newText = textValue.slice(0,-1) + operand;
-        display.textContent = newText;
+    
+    // Check the text include operator
+    if (includeOperator(textValue)) {
+        // Check position of the operator is the last
+        if (endsWithOperator(lastText)) {
+            newText = textValue.slice(0,-1) + operand;
+            display.textContent = newText;
+        }
+        else {
+            // if the operator not in the last position, it would finish the calculation.
+            display.textContent = operate(textValue) + operand;
+        }
     }
+
     else {
         display.textContent += operand;
     }
+})
+
+// Set 'AC' function to clear the display
+clear.addEventListener('click', function() {
+    display.textContent = '';
+})
+
+// Set 'backspace' function to delete a number and operand
+backspace.addEventListener('click', function() {
+    const currentText = display.textContent
+    const newText = currentText
+        .slice(0, currentText.length - 1);
+    display.textContent = newText;
 })

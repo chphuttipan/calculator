@@ -18,7 +18,7 @@
     margin: 15px 30px;
     padding: -20px;
     font-size: 36px;
-    overflow-y: auto;
+    overflow: auto;
 }
 
 #row {
