@@ -16,6 +16,7 @@ const backspace = document.getElementById('backspace');
 const clear = document.getElementById('clear');
 const dot = document.getElementById('dot');
 const display = document.getElementById('display');
+const equal = document.getElementById('equal');
 
 zero.addEventListener('click', function() {
     const numValue = zero.textContent;
@@ -67,6 +68,8 @@ nine.addEventListener('click', function() {
     display.textContent += numValue;
 })
 
+
+
 // 1. Create a function to check the last string is operator
 function endsWithOperator(text) {
     // Define the list of operators
@@ -108,7 +111,7 @@ function multiply(num1, num2) {
 // 6. Division function
 function divide(num1, num2) {
     if (num2 === 0) {
-        return 0;
+        throw new Error("Cannot divide by zero.");
     }
     else {
         return num1 / num2;
@@ -166,9 +169,61 @@ function operate(text) {
             default:
                 result = "Invalid operation";
         }
-        return result;
+        
+        return Math.round(result * 100) / 100; // rounded two decimals
     }
 }
+
+// Create a function to add 'dot' and check it doesn't exist  
+dot.addEventListener('click', function() {
+    const textValue = display.textContent;
+    // Check the textValue has the operator
+    if (includeOperator(textValue)) {
+        // Check the textValue end with the operator
+        if (endsWithOperator(textValue)) {
+            display.textContent += '.';
+        }
+        else {
+            const operators = new Set(['+', '-', '*', '/']);
+            var operand = '';
+            for (let i = 0; i < textValue.length; i++) {
+                if (operators.has(textValue[i])) {
+                    operand = textValue[i];
+                }
+            }
+
+            // Get the index of operand
+            const operandInd = textValue.indexOf(operand);
+            // Separate the equation to the first number and second number
+            let firstNum = textValue.slice(0, operandInd);
+            let secondNum = textValue.slice(operandInd + 1, textValue.length + 1);
+            
+            // Add the dot to the second number
+            if (secondNum.includes('.')) {
+                return 1;
+            }
+            else {
+                secondNum += '.';
+            }
+
+            // Convert all to string
+            firstNum = String(firstNum);
+            secondNum = String(secondNum);
+            
+            display.textContent = firstNum + operand + secondNum;
+        }
+    }
+
+    // If there is no operand in the equation 
+    else {
+        if (textValue.includes('.')) {
+            return 1;
+        }
+        else {
+            display.textContent += '.';
+        }
+    }
+})
 
 add.addEventListener('click', function() {
     const operand = '+';
@@ -273,4 +328,22 @@ backspace.addEventListener('click', function() {
     const newText = currentText
         .slice(0, currentText.length - 1);
     display.textContent = newText;
+})
+
+// Set 'equal' function
+equal.addEventListener('click', function() {
+    const textValue = display.textContent;
+    if (includeOperator(textValue)) {
+        if (endsWithOperator(textValue)) {
+            display.textContent = textValue;
+        }
+        else {
+            display.textContent = operate(textValue);
+        }
+    }
+    
+    // If there is no operator
+    else {
+        display.textContent = textValue;
+    }
 })
