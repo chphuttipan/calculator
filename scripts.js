@@ -18,57 +18,8 @@ const dot = document.getElementById('dot');
 const display = document.getElementById('display');
 const equal = document.getElementById('equal');
 
-zero.addEventListener('click', function() {
-    const numValue = zero.textContent;
-    display.textContent += numValue;
-})
-
-one.addEventListener('click', function() {
-    const numValue = one.textContent;
-    display.textContent += numValue;
-})
-
-two.addEventListener('click', function() {
-    const numValue = two.textContent;
-    display.textContent += numValue;
-})
-
-three.addEventListener('click', function() {
-    const numValue = three.textContent;
-    display.textContent += numValue;
-})
-
-four.addEventListener('click', function() {
-    const numValue = four.textContent;
-    display.textContent += numValue;
-})
-
-five.addEventListener('click', function() {
-    const numValue = five.textContent;
-    display.textContent += numValue;
-})
-
-six.addEventListener('click', function() {
-    const numValue = six.textContent;
-    display.textContent += numValue;
-})
-
-seven.addEventListener('click', function() {
-    const numValue = seven.textContent;
-    display.textContent += numValue;
-})
-
-eight.addEventListener('click', function() {
-    const numValue = eight.textContent;
-    display.textContent += numValue;
-})
-
-nine.addEventListener('click', function() {
-    const numValue = nine.textContent;
-    display.textContent += numValue;
-})
-
-
+// Create a calculate count to help counting number of the operation is called
+let calculateCount = 0;
 
 // 1. Create a function to check the last string is operator
 function endsWithOperator(text) {
@@ -93,9 +44,301 @@ function includeOperator(text) {
     return operators.some(operator => text.includes(operator));
 }
 
+
+zero.addEventListener('click', function() {
+    const numValue = zero.textContent;
+    let currentValue = display.textContent;
+    
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+one.addEventListener('click', function() {
+    const numValue = one.textContent;
+    let currentValue = display.textContent;
+
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+two.addEventListener('click', function() {
+    const numValue = two.textContent;
+    let currentValue = display.textContent;
+
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+three.addEventListener('click', function() {
+    const numValue = three.textContent;
+    let currentValue = display.textContent;
+
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+four.addEventListener('click', function() {
+    const numValue = four.textContent;
+    let currentValue = display.textContent;
+
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+five.addEventListener('click', function() {
+    const numValue = five.textContent;
+    let currentValue = display.textContent;
+
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+six.addEventListener('click', function() {
+    const numValue = six.textContent;
+    let currentValue = display.textContent;
+
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+seven.addEventListener('click', function() {
+    const numValue = seven.textContent;
+    let currentValue = display.textContent;
+
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }      
+})
+
+eight.addEventListener('click', function() {
+    const numValue = eight.textContent;
+    let currentValue = display.textContent;
+    
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+nine.addEventListener('click', function() {
+    const numValue = nine.textContent;
+    let currentValue = display.textContent;
+
+    if (currentValue === '0') {
+        display.textContent = numValue;
+    }
+
+    // If the current equation has an operand, the number can type follow the last number or operand.
+    else if (includeOperator(currentValue)) {
+        display.textContent += numValue;
+    }
+
+    /* If there is no operand, it should be checked 
+    the current number is the result of previous calculation or not
+    */
+    else {
+        if (calculateCount > 0) {
+            console.log(calculateCount);
+            calculateCount = 0;
+            display.textContent = '';
+            display.textContent += numValue;
+        }
+        else {
+            display.textContent += numValue;
+        }
+    }
+})
+
+
 // 3. Addition function
 function plus(num1, num2) {
-    return num1 + num2; 
+    return num1 + num2;
 }
 
 // 4. Subtraction function
@@ -111,12 +354,11 @@ function multiply(num1, num2) {
 // 6. Division function
 function divide(num1, num2) {
     if (num2 === 0) {
-        throw new Error("Cannot divide by zero.");
+        return;
     }
     else {
         return num1 / num2;
     }
-    
 }
 
 // 7. Create a operate function to calculate the equation
@@ -128,21 +370,30 @@ function operate(text) {
         var selectOperator;
         var numString = '';
         for (let i = 0; i < text.length; i++) {
+            // If it found the operator make the previous string as a number
             if (operators.has(text[i])) {
-                // Before manage the operator, convert the previous string as number
-                const numValue = Number(numString);
-                // Push the number to the list
-                eqList.push(numValue);
-                numString = '';
-                // Clear the numValue to empty string;
-                // It's an operator, keep it as a string
-                selectOperator = text[i];
-                eqList.push(selectOperator);
+                // Except it is negative number (start with '-') add the other number follow
+                if (i === 0) {
+                    if (text[i] === '-') {
+                        numString += text[i];
+                    }
+                }
+                else {
+                    // Before manage the operator, convert the previous string as number
+                    let numValue = parseFloat(numString);
+                    // Push the number to the list
+                    eqList.push(numValue);
+                    numString = '';
+                    // Clear the numValue to empty string;
+                    // It's an operator, keep it as a string
+                    selectOperator = text[i];
+                    eqList.push(selectOperator);
+                }   
             }
 
             else if (i  === text.length-1) {
                 numString += text[i];
-                const numValue = Number(numString);
+                let numValue = parseFloat(numString);
                 eqList.push(numValue);
             }
 
@@ -170,6 +421,7 @@ function operate(text) {
                 result = "Invalid operation";
         }
         
+        calculateCount += 1;
         return Math.round(result * 100) / 100; // rounded two decimals
     }
 }
@@ -265,7 +517,7 @@ minus.addEventListener('click', function() {
             display.textContent = operate(textValue) + operand;
         }
     }
-    
+
     else {
         display.textContent += operand;
     }
@@ -319,6 +571,7 @@ divi.addEventListener('click', function() {
 
 // Set 'AC' function to clear the display
 clear.addEventListener('click', function() {
+    calculateCount = 0;
     display.textContent = '';
 })
 
@@ -339,6 +592,7 @@ equal.addEventListener('click', function() {
         }
         else {
             display.textContent = operate(textValue);
+            calculateCount += 1;
         }
     }
     
